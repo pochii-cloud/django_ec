@@ -1,0 +1,30 @@
+{% extends 'homepage.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>farm products</title>
+</head>
+<body>
+{% block content %}
+    <h2 class="text-center bg-primary"><strong class="text-white"><i>farm</i>products</strong></h2>
+    <div class="card-group">
+      {% for  img_item in img %}
+     {% if  img_item.Category.name == 'farm' %}
+  <div class="card">
+    <img src="{{ img_item.image.url }}" class="card-img-top" height="300px" alt="...">
+     <div class="card-body text-dark">
+      <h5 class="card-title">{{ img_item.name }}</h5>
+      <p class="card-text">{{ img_item.description }}.</p>
+           <a class="btn btn-danger"  href="{% url 'Enquire' Enquire_id=img_item.id %}">enquire</a>
+    </div>
+  </div>
+
+     {% endif %}
+
+{% endfor %}
+</div>
+{% endblock %}
+</body>
+</html>

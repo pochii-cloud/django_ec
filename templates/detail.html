@@ -1,0 +1,26 @@
+{% extends 'homepage.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>detail page</title>
+</head>
+<body>
+{% block content %}
+<div class="offset-3 col-md-6">
+<form method="post">
+    {% csrf_token %}
+     <label>name</label>
+    <input type="text" name="name">
+    <br/>
+    <label>number</label>
+    <input type="number" name="number">
+    <br>
+    <button class="btn btn-success" type="submit">submit</button>
+</form>
+</div>
+{% endblock %}
+</body>
+</html>

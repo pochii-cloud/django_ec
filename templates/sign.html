@@ -1,0 +1,33 @@
+{% extends 'homepage.html' %}
+{% load static %}
+<head>
+    <title>
+        sign in
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+{% block content %}
+  <div class="offset-3 col-md-6">
+  <div class="p-3 mb-2 bg-success text-white">
+   <h2 class="text-center"><strong><i>please sign in</i></strong></h2>
+    <div class="form-group">
+     <form method="post">
+ {% csrf_token %}
+         {% for field in form%}
+             <label>{{ field.label_tag }}</label>
+             {{ field}}
+         {% endfor %}
+     <br>
+         <button class="btn btn-danger" type="submit">submit </button>
+     <p>already got an account?<a class="text-danger" href="{% url 'login' %}">login here</a></p>
+     </form>
+    <div class="p-3 mb-2 bg-success text-white">
+        {{ form.errors }}
+    </div>
+    </div>
+  </div>
+    </div>
+{% endblock %}
+</body>
+</html>

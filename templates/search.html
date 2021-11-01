@@ -1,0 +1,29 @@
+{% extends 'homepage.html' %}
+{% load static%}
+<meta charset="UTF-8">
+<title>search</title>
+{% block content %}
+{% if post %}
+<h2 class="text-center">search result found</h2>
+<br>
+{% for i in post %}
+    <div class="container">
+    <div class="card">
+     <centre><h2><a href="/homepage/{{ i.slug }}"></a></h2></centre>
+{#         <a href="{{ i.get_absolute_url }}">{{ i.title }}</a>#}
+        <div class="card-title">
+            <a href="{{ i.get_absolute_url }}"><h2 class="text-center">{{ i.title}}</h2></a>
+        </div>
+        <img src="{{ i.image.url }}" alt="not found" height="400px">
+  <div class="card-body">
+           <p class="card-text text-dark">{{ i.body }}</p>
+  </div>
+</div>
+{% endfor %}
+   {% else %}
+    <h2 class="text-center"><strong>Oops!!!</strong><em>nothing found</em></h2>
+{% endif %}
+{% endblock %}
+</div>
+{% block footer %}
+{% endblock %}

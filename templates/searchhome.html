@@ -1,0 +1,34 @@
+{% extends 'homepage.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>searchresults</title>
+</head>
+{% block content %}
+<body>
+{% if img %}
+    <h2 class="text-center"><strong>search result found</strong></h2>
+<br>
+{% for i in product %}
+    <div class="container">
+     <div class="card">
+     <centre><h2><a href="/homepage/{{ i.slug }}"></a></h2></centre>
+        <div class="card-title"> <h2>{{ i.name }}</h2></div>
+     <img src="{{ i.image.url }}" alt="not found" height="400px">
+  <div class="card-body">
+           <p class="card-text text-dark">{{ i.description }}</p>
+  </div>
+</div>
+   <a class="btn btn-danger"  href="{% url 'Enquire' Enquire_id=i.id %}">enquire</a>
+{% endfor %}
+   {% else %}
+<h2 class="text-center"><strong>Oops!!!</strong>nothing found</h2>
+{% endif %}
+  </div>
+</body>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+</html>

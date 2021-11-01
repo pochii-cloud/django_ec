@@ -1,0 +1,472 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>home</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/carousel.css' %}">
+</head>
+
+<nav>
+    <style>
+     nav{
+            position: sticky;
+            z-index: 10;
+            left: 0;
+            right: 0;
+            top: 0;
+            font-family: 'Montserrat',sans-serif;
+            padding: 0.5%;
+            height: 80px;
+            background-color: #842029;
+        }
+        nav .logo{
+             float: left;
+             width: 40%;
+             height: 80%;
+            align-items: center;
+            font-size: 24px;
+             color: #fff;
+        }
+        nav .links{
+            float: right;
+            padding: 0;
+            margin: 0;
+            width: 60%;
+            height: 80%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        nav .links li{
+            list-style: none;
+
+        }
+        nav .links a{
+            display: block;
+            padding: 1em;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+        #nav-toggle{
+            position: absolute;
+            top: -100px;
+        }
+        nav .icon-burger{
+            display: none;
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        nav .icon-burger .line{
+            width: 30px;
+            height: 5px;
+            background-color: #fff;
+            margin: 5px;
+            border-radius: 3px;
+            transition: all .3s ease-in-out;
+        }
+        @media screen and (max-width: 768px){
+            nav .logo{
+                float:none;
+                width: auto;
+                justify-content: center;
+            }
+            nav .links{
+                float: none;
+                position: fixed;
+                z-index: 9;
+                left: 0;
+                right: 0;
+                top: 100px;
+                bottom: 100%;
+                width: auto;
+                height: auto;
+                flex-direction: column;
+                justify-content: space-between;
+                background-color: rgba(0,0,0,.8);
+                overflow: auto;
+                transition: all .5s ease-in-out;
+            }
+            nav .links a{
+                font-size: 20px;
+            }
+            nav :checked ~ .links{
+                bottom: 0;
+            }
+            nav .icon-burger{
+                display: block;
+            }
+            nav :checked ~ .icon-burger .line:nth-child(1){
+                 transform: translateY(10px) rotate(225deg);
+            }
+             nav :checked ~ .icon-burger .line:nth-child(3){
+                 transform: translateY(-10px) rotate(-225deg);
+            }
+              nav :checked ~ .icon-burger .line:nth-child(2){
+                 opacity: 0;
+
+            }
+        }
+
+    </style>
+    <input id="nav-toggle" type="checkbox">
+    <div class="logo"><strong>Chimnet Traders</strong><img src="{% static 'images/logo.jpg' %}" height="60px"></div>
+    <ul class="links ">
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <li><a href="{% url 'electronics' %}">Electronics</a></li>
+        <li><a href="{% url 'furniturepage' %}">Furniture</a></li>
+        <li><a href="{% url 'farm' %}">Farm products</a></li>
+         <li><a href="{% url 'shoes' %}">Shoes/clothes</a></li>
+        <li><a href="{% url 'blog' %}">Blog</a></li>
+        <li><a href="{% url 'jobs' %}">Jobs</a></li>
+         <li><a href="{% url 'about' %}">About us</a></li>
+    </ul>
+    <label for="nav-toggle" class="icon-burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </label>
+</nav>
+<body>
+{% block content %}
+    <div class="bg-primary">
+    <div class="text-center">
+          <li><a class="text-white" href="{% url 'login' %}">login</a></li>
+         <li ><a class="text-white" href="{% url 'sign' %}">sign in</a></li>
+            <span class="text-white">Hello{{ request.user }}</span>
+     <span class="text-white"><a class="text-danger" href="{% url 'logout' %}">logout</a></span>
+
+    </div>
+    <div class="text-center">
+        <form method="get" action="{%url 'searchhome'%}">
+    {% csrf_token %}
+    <input type="text"  name="search" placeholder="search"/>
+        <button class="btn btn-danger" type="submit">search</button>
+    </form>
+    </div>
+    </div>
+     <div class="slidershow middle">
+
+    <div class="slides">
+        <input type="radio" name="r" id="r1" checked>
+        <input type="radio" name="r" id="r2">
+        <input type="radio" name="r" id="r2">
+        <input type="radio" name="r" id="r3">
+        <input type="radio" name="r" id="r4">
+        <input type="radio" name="r" id="r5">
+        <div class="slide s1">
+            <img src="{% static 'images/advert.jpeg' %}" alt="not found">
+        </div>
+         <div class="slide ">
+            <img src="{% static 'images/buy.jpg' %}" alt="not found">
+        </div>
+         <div class="slide">
+            <img src="{% static 'images/blog.png' %}" alt="not found">
+        </div>
+         <div class="slide ">
+            <img src="{% static 'images/slide2.jpg' %}" alt="not found">
+        </div>
+         <div class="slide ">
+            <img src="{% static 'images/laptop.jpg' %}" alt="not found">
+        </div>
+
+    </div>
+  <div class="navigation">
+      <label for="r1" class="bar"></label>
+      <label for="r2" class="bar"></label>
+      <label for="r3" class="bar"></label>
+      <label for="r4" class="bar"></label>
+      <label for="r5" class="bar"></label>
+  </div>
+    </div>
+<div class="bg-primary">
+    <h2 class="text-center"><strong>welcome to our advertising site</strong></h2>
+    </div>
+<div class="p-3 mb-2 bg-dark text-white">
+<div class="bg-danger">
+    <marquee>
+    <h2 class="text-center"><strong class="text-white">how do i advertise my products?</strong></h2></marquee>
+        <h5 class="text-center"><strong>1.write you name or business name on the name field and select category<br> 2.include any type of descriptions for your products/business plus phone number<br>
+             and lastly select your images & press the upload button</strong></h5>
+    <div class="text-center">
+        <a class="btn btn-warning" href="{% url 'advert' %}">upload</a>
+    </div>
+
+</div>
+
+    <div class="bg-warning">
+  {% for message in messages %}
+ <h2 class="text-center"><strong>{{ message }} </strong></h2>
+{% endfor %}
+</div>
+    <h2 class="text-center bg-primary"><strong class="text-white"><i>Elect</i>ronics</strong></h2>
+    <div class="p-3 mb-2 bg-dark text-white">
+<div class="card-group">
+    {% for product_item in product %}
+     {% if  product_item.Category.name == 'electronics' %}
+  <div class="card">
+    <img src="{{ product_item.image.url }}" class="card-img-top" height="300px" alt="...">
+    <div class="card-body text-dark">
+      <h5 class="card-title">{{ product_item.name }}</h5><hr>
+        <p class="card-text">sh.{{ product_item.price }}</p>
+        <a class="btn btn-danger"  href="{% url 'Enquire' Enquire_id=product_item.id %}">enquire</a>
+    </div>
+  </div>
+     {% endif %}
+{% endfor %}
+</div>
+     <ul class="pagination">
+        {% if product.has_previous %}
+        <li class="page-item">
+            <a href="?page=1" class="page-link">first</a>
+        </li>
+         <li class="page-item">
+            <a href="{{ product.previous_page_link }}" class="page-link">previous</a>
+        </li>
+        {% endif %}
+
+     {% if product.has_next %}
+        <li class="page-item">
+            <a href="?page={{ product.next_page_number }}" class="page-link">next</a>
+        </li>
+         <li class="page-item">
+            <a href="?page={{ product.paginator.num_pages }}" class="page-link">last</a>
+        </li>
+        {% endif %}
+    </ul>
+    </div>
+ <h2 class="text-center bg-primary"><strong class="text-white"><i>farm</i>Products</strong></h2>
+    <div class="p-3 mb-2 bg-dark text-white">
+    <div class="card-group">
+   {% for  product_item in product %}
+     {% if  product_item.Category.name == 'farm' %}
+  <div class="card">
+    <img src="{{ product_item.image.url }}" class="card-img-top" height="300px" alt="...">
+    <div class="card-body text-dark">
+      <h5 class="card-title">{{ product_item.name }}</h5><hr>
+        <p class="card-text">{{ product_item.description }}.</p>
+          <a class="btn btn-danger"  href="{% url 'Enquire' Enquire_id=product_item.id %}">enquire</a>
+    </div>
+  </div>
+     {% endif %}
+{% endfor %}
+</div>
+     <ul class="pagination">
+        {% if product.has_previous %}
+        <li class="page-item">
+            <a href="?page=1" class="page-link">first</a>
+        </li>
+         <li class="page-item">
+            <a href="{{ product.previous_page_link }}" class="page-link">previous</a>
+        </li>
+        {% endif %}
+
+     {% if product.has_next %}
+        <li class="page-item">
+            <a href="?page={{ product.next_page_number }}" class="page-link">next</a>
+        </li>
+         <li class="page-item">
+            <a href="?page={{ product.paginator.num_pages }}" class="page-link">last</a>
+        </li>
+        {% endif %}
+    </ul>
+    </div>
+
+     <h2 class="text-center bg-primary"><strong class="text-white"><i>shoes/</i>clothes</strong></h2>
+    <div class="p-3 mb-2 bg-dark text-white">
+     <div class="card-group">
+   {% for  product_item in product %}
+     {% if  product_item.Category.name == 'shoes/clothes' %}
+  <div class="card">
+    <img src="{{ product_item.image.url }}" class="card-img-top" height="300px" alt="...">
+    <div class="card-body text-dark">
+      <h5 class="card-title">{{ product_item.name }}</h5><hr>
+        <p class="card-text">{{ product_item.description }}.</p>
+         <a class="btn btn-danger"  href="{% url 'Enquire' Enquire_id=product_item.id %}">enquire</a>
+    </div>
+  </div>
+     {% endif %}
+{% endfor %}
+</div>
+     <ul class="pagination">
+        {% if product.has_previous %}
+        <li class="page-item">
+            <a href="?page=1" class="page-link">first</a>
+        </li>
+         <li class="page-item">
+            <a href="{{ product.previous_page_link }}" class="page-link">previous</a>
+        </li>
+        {% endif %}
+
+     {% if product.has_next %}
+        <li class="page-item">
+            <a href="?page={{ product.next_page_number }}" class="page-link">next</a>
+        </li>
+         <li class="page-item">
+            <a href="?page={{ product.paginator.num_pages }}" class="page-link">last</a>
+        </li>
+        {% endif %}
+    </ul>
+    </div>
+
+     <h2 class="text-center bg-primary"><strong class="text-white"><i>business</i></strong></h2>
+    <div class="p-3 mb-2 bg-dark text-white">
+      <div class="card-group">
+   {% for  product_item in product %}
+     {% if  product_item.Category.name == 'business' %}
+  <div class="card">
+    <img src="{{ product_item.image.url }}" class="card-img-top" height="300px" alt="...">
+    <div class="card-body text-dark">
+      <h5 class="card-title">{{ product_item.name }}</h5><hr>
+        <p class="card-text">{{ product_item.description }}.</p>
+         <a class="btn btn-danger"  href="{% url 'Enquire' Enquire_id=product_item.id %}">enquire</a>
+    </div>
+  </div>
+     {% endif %}
+{% endfor %}
+</div>
+     <ul class="pagination">
+        {% if product.has_previous %}
+        <li class="page-item">
+            <a href="?page=1" class="page-link">first</a>
+        </li>
+         <li class="page-item">
+            <a href="{{ product.previous_page_link }}" class="page-link">previous</a>
+        </li>
+        {% endif %}
+
+     {% if product.has_next %}
+        <li class="page-item">
+            <a href="?page={{ product.next_page_number }}" class="page-link">next</a>
+        </li>
+         <li class="page-item">
+            <a href="?page={{ product.paginator.num_pages }}" class="page-link">last</a>
+        </li>
+        {% endif %}
+    </ul>
+    </div>
+
+     <h2 class="text-center bg-primary"><strong class="text-white"><i>furniture</i></strong></h2>
+    <div class="p-3 mb-2 bg-dark text-white">
+      <div class="card-group">
+   {% for  product_item in product %}
+     {% if  product_item.Category.name == 'furniture' %}
+  <div class="card">
+    <img src="{{ product_item.image.url }}" class="card-img-top" height="300px" alt="...">
+    <div class="card-body text-dark">
+      <h5 class="card-title">{{ product_item.name }}</h5><hr>
+        <p class="card-text">{{ iproduct_item.description }}.</p>
+        <a class="btn btn-danger"  href="{% url 'Enquire' Enquire_id=product_item.id %}">enquire</a>
+    </div>
+  </div>
+     {% endif %}
+{% endfor %}
+</div>
+     <ul class="pagination">
+        {% if product.has_previous %}
+        <li class="page-item">
+            <a href="?page=1" class="page-link">first</a>
+        </li>
+         <li class="page-item">
+            <a href="{{ product.previous_page_link }}" class="page-link">previous</a>
+        </li>
+        {% endif %}
+
+     {% if product.has_next %}
+        <li class="page-item">
+            <a href="?page={{ product.next_page_number }}" class="page-link">next</a>
+        </li>
+         <li class="page-item">
+            <a href="?page={{product.paginator.num_pages }}" class="page-link">last</a>
+        </li>
+        {% endif %}
+    </ul>
+    </div>
+{% endblock %}
+<div class="bg-gradient">
+<hr>
+</div>
+ {% block footer %}
+      <div class="p-3 mb-2 bg-dark text-white">
+     <div class="section_footer">
+    	<div class="container">
+    		<div class="mail_section">
+    			<div class="row">
+    				<div class="col-sm-6 col-lg-2">
+    				</div>
+    				<div class="col-sm-6 col-lg-2">
+                        <div class="footer-logo"><img src="{% static 'images/phone-icon.png' %}"><span class="map_text"><a href="">0713844411</a></span></div>
+                        <div class="footer-logo"><img src="{% static 'images/phone-icon.png' %}"><span class="map_text"><a href="">0735203885</a></span></div>
+    				</div>
+    				<div class="col-sm-6 col-lg-3">
+                        <div class="footer-logo"><img src="{% static 'images/email-icon.png' %}"> <a href="http://sircharles320@gmail.com">sircharles320@gmail.com</a></div>
+    				</div>
+    				<div class="col-sm-6 col-lg-3">
+    					<div class="social_icon">
+    						<ul>
+    							<a href="https://touch.facebook.com/chimnet-Traders"><img src="{% static 'images/fb-icon.png' %}">facebook</a><br>
+    							<a href="http://twitter.com/SirCharles320"><img src="{% static 'images/twitter-icon.png' %}">twitter</a><br>
+    						</ul>
+    					</div>
+    				</div>
+    				<div class="col-sm-2"></div>
+    			</div>
+    	    </div>
+    	    <div class="footer_section_2">
+		        <div class="row">
+    		        <div class="col-sm-4 col-lg-2">
+
+    		        </div>
+    		        <div class="col-sm-4 col-lg-2">
+{#		        	<p class="dummy_text">join the biggest online advertising platform.</p>#}
+                         <h2 class="shop_text">links </h2>
+                          <div class="delivery_text">
+    				    	<ul>
+                                <li><a class="nav-link text-white" aria-current="page" href="{% url 'contact' %}">contact us</a></li>
+                                <li><a class="nav-link text-white" aria-current="page" href="{% url 'about' %}">About us</a></li>
+                                <li><a class="nav-link text-white" aria-current="page" href="{% url 'blog' %}">blog</a></li>
+    				    	</ul>
+    				    </div>
+    		        </div>
+    		        <div class="col-sm-4 col-md-6 col-lg-3">
+                        <div class="logo">
+                            <img src="{% static 'images/logo.jpg' %}" height="100px" alt="not found">
+
+                        </div>
+{#    				    <h2 class="shop_text">Useful links </h2>#}
+{#    				    <div class="delivery_text">#}
+{#    				    	<ul>#}
+{#                                <li><a class="nav-link text-white" aria-current="page" href="{% url 'contact' %}">contact us</a></li>#}
+{#                                <li><a class="nav-link text-white" aria-current="page" href="{% url 'about' %}">About us</a></li>#}
+{#                                <li><a class="nav-link text-white" aria-current="page" href="{% url 'blog' %}">blog</a></li>#}
+{#    				    	</ul>#}
+{#    				    </div>#}
+    		        </div>
+    			<div class="col-sm-6 col-lg-3">
+    				<h2 class="adderess_text">Products</h2>
+    				<div class="delivery_text">
+    				    	<ul>
+                                <li><a class="nav-link text-white" aria-current="page" href="{% url 'electronics' %}">electronics</a></li>
+                                <li><a class="nav-link text-white" aria-current="page" href="{% url 'farm' %}">farm products</a></li>
+                                <li><a class="nav-link text-white" aria-current="page" href="{% url 'shoes' %}">shoes/clothes</a></li>
+                                <li><a class="nav-link text-white" aria-current="page" href="{% url 'homepage' %}">furniture</a></li>
+    				    	</ul>
+    				    </div>
+    			</div>
+    			</div>
+    	        </div>
+	        </div>
+    	</div>
+    </div>
+  </div>
+{% endblock %}
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

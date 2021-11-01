@@ -1,0 +1,37 @@
+{% extends 'homepage.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jobs</title>
+</head>
+<body>
+{% block content %}
+    <div class="bg-danger">
+    <br>
+     <h2 class="text-center text-white"><strong>Apply<i>now</i></strong></h2>
+    <br>
+     <div class="p-3 mb-2 bg-dark text-white">
+    <div class="card-group">
+    {% for  img_item in img %}
+     {% if  img_item.Category.name == 'jobs' %}
+  <div class="card">
+    <img src="{{ img_item.image.url }}" class="card-img-top" height="300px" alt="...">
+     <div class="card-body text-dark">
+      <h5 class="card-title">{{ img_item.name }}</h5>
+      <p class="card-text">{{ img_item.description }}.</p>
+           <a class="btn btn-danger"  href="{% url 'Enquire' Enquire_id=img_item.id %}">enquire</a>
+    </div>
+  </div>
+
+     {% endif %}
+
+{% endfor %}
+
+</div>
+    </div>
+    </div>
+{% endblock %}
+</body>
+</html>

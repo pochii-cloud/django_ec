@@ -1,0 +1,41 @@
+{% extends 'homepage.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>contact</title>
+</head>
+<body>
+{% block content %}
+    <div class="bg-primary">
+        <h1 class="text-white text-center"><strong>send us any type of <i> feedback,complains or recommendations</i></strong></h1>
+    </div>
+    <div class="myform">
+    <style>
+        body{
+            width: 100%;
+        }
+        .myform{
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <div class="form-group">
+        <div class="bg-danger">
+              {% for message in messages %}
+     <h2 class="text-center text-white"><p class="text-dark">{{ request.username }}</p>{{ message }}</h2>
+ {% endfor %}
+        </div>
+<form method="post">
+    {% csrf_token %}
+         {{ form }}
+<button class="btn btn-success" type="submit">submit</button>
+</form>
+    </div>
+    </div>
+{% endblock %}
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{% extends 'homepage.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>blog</title>
+</head>
+<body>
+{% block content %}
+    <div class="bg-success text-center">
+    <h2 class="text-center bg-primary"><strong class="text-white"><i> welcome to our blogsite</i></strong></h2>
+    <form method="get" action="{% url 'search' %}">
+    {% csrf_token %}
+    <input type="text"  name="search" placeholder="search"/>
+        <button class="btn btn-danger" type="submit">search</button>
+    </form>
+    </div>
+    <div class="bg-dark">
+    <h2 class="text-white text-center">click to post blog</h2>
+<div class="text-center">
+    <a class="btn btn-danger" href="{% url 'blogone' %}">post</a>
+</div>
+    </div>
+    <br>
+    {% for post in post %}
+<div class="card bg-dark text-white">
+<div>
+    <h2 class="text-center text-white">{{ post.title }}</h2>
+    <br>
+</div>
+
+<div class="card">
+     <img src="{{ post.image.url}}" alt="not found" height="400px">
+    <div class="text-dark">
+       <hr>
+    </div>
+
+  <div class="card-body">
+      <div class="text-center">
+           <p class="card-text text-dark">posted at {{ post.date_added }}<br><b>{{ post.body }}</b></p>
+{#          <div  class="text-dark"><h2>views={{ post.views }};</h2></div>#}
+      </div>
+
+  </div>
+</div>
+{% endfor %}
+
+    <ul class="pagination">
+        {% if post.has_previous %}
+        <li class="page-item">
+            <a href="?page=1" class="page-link">first</a>
+        </li>
+         <li class="page-item">
+            <a href="{{ post.previous_page_link }}" class="page-link">previous</a>
+        </li>
+        {% endif %}
+
+     {% if post.has_next %}
+        <li class="page-item">
+            <a href="?page={{ post.next_page_number }}" class="page-link">next</a>
+        </li>
+         <li class="page-item">
+            <a href="?page={{ post.paginator.num_pages }}" class="page-link">last</a>
+        </li>
+        {% endif %}
+    </ul>
+</div>
+
+    <div class="bg-light">
+
+    </div>
+{% endblock %}
+</body>
+</html>

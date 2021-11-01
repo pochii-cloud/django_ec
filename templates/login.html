@@ -1,0 +1,41 @@
+{% extends 'homepage.html' %}
+{% load static %}
+<html>
+<head>
+    <title>
+    login
+</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
+</head>
+<body>
+{% block content %}
+ <div class="offset-3 col-md-6">
+ <div class="p-3 mb-2 bg-success text-white">
+     <h2 class="text-center"><strong><i>please login</i></strong></h2>
+    <div class="form-group">
+     <form method="POST">
+ {% csrf_token %}
+         <div class="text-center">
+       <input type="text" name="username" placeholder="username" class="form-control"><br>
+         <input type="password" name="password" placeholder="password" class="form-control"><br>
+            <button class="btn btn-danger" type="submit">log in</button>
+             <p>dont have account yet?<a class="text-danger" href="{% url 'sign'%}" >sign-in here</a></p>
+             </div>
+     </form>
+
+    <div class="p-3 mb-2 bg-success text-danger">
+          {% for message in messages %}
+     <p>{{ message }}</p>
+ {% endfor %}
+    <p class="text-white"> {{ form.errors }}</p>
+    </div>
+    </div>
+    </div>
+
+
+</form>
+</div>
+{% endblock %}
+</body>
+
+</html>
